@@ -9,9 +9,9 @@ import websockets
 import concurrent.futures
 import logging
 from vosk import Model, SpkModel, KaldiRecognizer
-from redis import Redis
+# from redis import Redis
 
-redis = Redis(host='redis', port=6379)
+# redis = Redis(host='redis', port=6379)
 
 
 def process_chunk(rec, message):
@@ -90,7 +90,7 @@ def start():
     args = type('', (), {})()
 
     args.interface = os.environ.get('VOSK_SERVER_INTERFACE', '0.0.0.0')
-    args.port = int(os.environ.get('redis', 2700))
+    args.port = int(os.environ.get('VOSK_SERVER_PORT', 2700))
     args.model_path = os.environ.get('VOSK_MODEL_PATH', 'model')
     args.spk_model_path = os.environ.get('VOSK_SPK_MODEL_PATH')
     args.sample_rate = float(os.environ.get('VOSK_SAMPLE_RATE', 8000))
