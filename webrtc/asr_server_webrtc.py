@@ -20,7 +20,7 @@ ROOT = Path(__file__).parent
 vosk_interface = os.environ.get('VOSK_SERVER_INTERFACE', '0.0.0.0')
 vosk_port = int(os.environ.get('VOSK_SERVER_PORT', 2700))
 vosk_model_path = os.environ.get('VOSK_MODEL_PATH', 'model')
-vosk_sample_rate = float(os.environ.get('VOSK_SAMPLE_RATE', 8000))
+vosk_sample_rate = float(os.environ.get('VOSK_SAMPLE_RATE', 16000))
 vosk_cert_file = os.environ.get('VOSK_CERT_FILE', None)
 vosk_key_file = os.environ.get('VOSK_KEY_FILE', None)
 
@@ -73,7 +73,7 @@ class KaldiTask:
     async def __run_audio_xfer(self):
         loop = asyncio.get_running_loop()
         dataframes = bytearray(b"")
-        max_frames_len = 8000
+        max_frames_len = 16000
         while True:
             frame = await self.__track.recv()
             frame = self.__resampler.resample(frame)
